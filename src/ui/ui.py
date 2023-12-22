@@ -12,9 +12,10 @@ from util.utils import (
     getCurrentMetrics,
     getPopularWords,
     getTextFromFile,
-    saveTextOnExit,
+    saveCurrentText,
 )
 from components.AlertPopup import AlertPopup
+from components.PopularWords import PopularWords
 
 
 #! UI Sections
@@ -116,7 +117,7 @@ def updateMetrics(
         text=f"Time to read: {timeToRead} min" if timeToRead else "No words found"
     )
 
-    saveTextOnExit(text)
+    saveCurrentText(text)
 
 
 def loadTextFromFile(
@@ -134,29 +135,8 @@ def loadTextFromFile(
 
 
 def showPopularWords(text):
-    console.log(
-        f"Started calculating most popular words from a text with {len(text)} symbols..."
-    )
-
-    # TODO read below and implement
-    # have a new window open where we would have a scrollable frame
-    # in the scrollable frame we would write all our popular words
-    # we will write from a list of custom objects from a class, that would have a word and a count
-    # each object would have a string representation
-    # or we could actually even have a class that would wrap our words container and do all the operations on them, not sure yet
-
-    lines, _ = countLines(text)
-    mostPopularWords = getPopularWords(lines)
-    mostPopularWords = sorted(
-        mostPopularWords.items(), key=lambda x: x[1], reverse=True
-    )
-
-    resultsString = "Most popular words in a given text:\n"
-    for word in mostPopularWords:
-        resultsString += f"  - {word[0]}: {word[1]}\n"
-    AlertPopup(resultsString)
-
-    console.log(f"Calculated {len(mostPopularWords)} most popular words")
+    popularWordsWindow = PopularWords()
+    popularWordsWindow.updateWords()
 
 
 def saveTextToFile(text):

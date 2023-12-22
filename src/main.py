@@ -1,4 +1,3 @@
-from tkinter import Image
 from rich.traceback import install
 from customtkinter import *
 

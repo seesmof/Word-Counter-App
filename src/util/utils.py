@@ -73,7 +73,7 @@ def generateFileName(text: str) -> str:
     return fileName
 
 
-def saveTextOnExit(text: str) -> None:
+def saveCurrentText(text: str) -> None:
     text = [line.strip() for line in text.split("\n") if line.strip()]
     filePath = Path("data/latest.md")
     filePath.write_text("\n".join(text))
