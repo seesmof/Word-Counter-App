@@ -1,5 +1,4 @@
 from datetime import date
-from math import ceil
 from pathlib import Path
 from string import punctuation
 from rich.console import Console

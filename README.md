@@ -22,6 +22,9 @@ Word Counter is a simple and easy-to-use tool for analyzing texts and getting st
 
 ## Screenshots
 
+![Main App Tab](./public/app-screenshots/python3.10_w8UvJiBhWA.png)
+![Popular Words Window](./public/app-screenshots/python3.10_DvDdwEJSgz.png)
+
 ## Links
 
 - [Icon](https://www.flaticon.com/)
