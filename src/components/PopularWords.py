@@ -1,3 +1,4 @@
+from os import path
 from customtkinter import *
 
 from util.utils import getPopularWords
@@ -30,7 +31,10 @@ class PopularWords(CTkToplevel):
             widget.destroy()
 
         words = []
-        with open("data/latest.md", encoding="utf-8") as f:
+        currentDir = path.dirname(path.abspath(__file__))
+        dataFile = path.join(currentDir, "..", "..", "data", "latest.md")
+
+        with open(dataFile, "r", encoding="utf-8") as f:
             for line in f:
                 words.extend(line.split())
 

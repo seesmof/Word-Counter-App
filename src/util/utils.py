@@ -1,4 +1,5 @@
 from datetime import date
+from os import path
 from pathlib import Path
 from string import punctuation
 from rich.console import Console
@@ -75,5 +76,7 @@ def generateFileName(text: str) -> str:
 
 def saveCurrentText(text: str) -> None:
     text = [line.strip() for line in text.split("\n") if line.strip()]
-    filePath = Path("data/latest.md")
-    filePath.write_text("\n".join(text), encoding="utf-8")
+    currentDir = path.dirname(path.abspath(__file__))
+    dataFile = path.join(currentDir, "..", "..", "data", "latest.md")
+    with open(dataFile, "w", encoding="utf-8") as f:
+        f.write("\n".join(text))

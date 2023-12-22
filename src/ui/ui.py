@@ -1,3 +1,4 @@
+from os import path
 from customtkinter import *
 from rich.console import Console
 
@@ -137,7 +138,9 @@ def showPopularWords(text):
 
 def saveTextToFile(text):
     try:
-        filePath = f"data/{generateFileName(text)}.md"
+        fileName = generateFileName(text)
+        currentDir = path.dirname(path.abspath(__file__))
+        filePath = path.join(currentDir, "..", "..", "data", fileName + ".md")
     except Exception as e:
         console.log(
             "Failed to save text to file, most likely due to input field being empty"
@@ -202,16 +205,16 @@ def renderMainTab(root) -> CTkTextbox:
         ),
     )
 
-    try:
-        with open("data/latest.md", encoding="utf-8") as f:
-            loadedText = f.read()
-            getTextInput.insert("0.0", loadedText)
-            updateMetrics(
-                loadedText,
-                resultsLines,
-                resultsSymbols,
-                resultsWords,
-                resultsReadingTime,
-            )
-    except Exception as e:
-        console.log("Failed to load file")
+    currentDir = path.dirname(path.abspath(__file__))
+    dataFile = path.join(currentDir, "..", "..", "data", "latest.md")
+
+    with open(dataFile, "r", encoding="utf-8") as f:
+        loadedText = f.read()
+        getTextInput.insert("0.0", loadedText)
+        updateMetrics(
+            loadedText,
+            resultsLines,
+            resultsSymbols,
+            resultsWords,
+            resultsReadingTime,
+        )

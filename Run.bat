@@ -1,5 +1,3 @@
-@echo off
-
 if not exist "./data/requirements.txt" (
   echo Installing requirements...
   pip install -r requirements.txt
@@ -7,4 +5,4 @@ if not exist "./data/requirements.txt" (
 )
 
 python ./src/main.py
-exit
+pause
