@@ -12,6 +12,7 @@ from util.utils import (
     getCurrentMetrics,
     getPopularWords,
     getTextFromFile,
+    saveTextOnExit,
 )
 from components.AlertPopup import AlertPopup
 
@@ -43,6 +44,8 @@ def updateMetrics(
     timeHeading.configure(
         text=f"Time to read: {timeToRead} min" if timeToRead else "No words found"
     )
+
+    saveTextOnExit(text)
 
 
 def renderInputSection(root) -> tuple[CTkLabel, CTkTextbox]:
@@ -155,12 +158,17 @@ def showPopularWords(text):
 
 
 def saveTextToFile(text):
-    if text == "" or text is None or len(text) == 0:
-        console.log("Failed to save text to file since it's empty")
-        AlertPopup("Cannot save an empty text!")
+    try:
+        filePath = f"data/{generateFileName(text)}.md"
+    except Exception as e:
+        console.log(
+            "Failed to save text to file, most likely due to input field being empty"
+        )
+        AlertPopup(
+            "Could not save text to file. Make sure the input field is not empty."
+        )
         return
 
-    filePath = f"data/{generateFileName(text)}.md"
     _, linesCount, symbolsCount, wordsCount, _ = getCurrentMetrics(text)
     metaData = f"""---
 words: {wordsCount}
@@ -174,7 +182,7 @@ symbols: {symbolsCount}
         f.write(text)
 
 
-def renderMainTab(root) -> None:
+def renderMainTab(root) -> CTkTextbox:
     getTextHeading, getTextInput = renderInputSection(root)
 
     (
@@ -214,3 +222,17 @@ def renderMainTab(root) -> None:
             resultsReadingTime,
         ),
     )
+
+    try:
+        with open("data/latest.md", "r") as f:
+            loadedText = f.read()
+            getTextInput.insert("0.0", loadedText)
+            updateMetrics(
+                loadedText,
+                resultsLines,
+                resultsSymbols,
+                resultsWords,
+                resultsReadingTime,
+            )
+    except Exception as e:
+        console.log("Failed to load file")
