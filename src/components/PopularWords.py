@@ -9,7 +9,6 @@ class PopularWords(CTkToplevel):
         self.title("Most Popular Words")
         self.geometry("400x400")
         self.resizable(False, False)
-        self.iconbitmap("public/logo.ico")
 
         self.wordsContainer = CTkScrollableFrame(
             self,

@@ -12,6 +12,7 @@
 
 - [Table of contents](#table-of-contents)
 - [About](#about)
+- [How to Use](#how-to-use)
 - [Screenshots](#screenshots)
 - [Links](#links)
 - [License](#license)
@@ -19,6 +20,12 @@
 ## About
 
 Word Counter is a simple and easy-to-use tool for analyzing texts and getting statistics about the number of words and characters they contain. It allows users to load texts from files and calculates various metrics such as word count, character count, and reading level. The app is designed to be straightforward and intuitive, making it a useful tool for writers, students, and anyone who needs to analyze texts quickly and easily.
+
+## How to Use
+
+1. [Download](https://github.com/seesmof/word-counter/releases) the files to your computer
+2. Open the downloaded folder and double-click `Run.vbs` file
+3. Enjoy!
 
 ## Screenshots
 

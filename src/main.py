@@ -13,7 +13,6 @@ def configureApp() -> CTk:
     app.geometry("380x390")
     app.resizable(False, False)
     app.title("Word Counter App")
-    app.iconbitmap("public/logo.ico")
 
     app.bind("<Escape>", lambda event: closeApp(app, event=event))
     set_default_color_theme("dark-blue")
