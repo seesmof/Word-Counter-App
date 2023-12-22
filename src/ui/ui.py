@@ -5,12 +5,8 @@ console = Console()
 
 
 from util.utils import (
-    countLines,
-    countSymbols,
-    countWords,
     generateFileName,
     getCurrentMetrics,
-    getPopularWords,
     getTextFromFile,
     saveCurrentText,
 )

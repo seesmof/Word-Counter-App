@@ -50,19 +50,9 @@ def getCurrentMetrics(text: str) -> tuple[int, int, int, int]:
     return lines, linesCount, symbolsCount, wordsCount, timeToRead
 
 
-def readTextFromFile(filePath: str) -> str:
-    try:
-        text = Path(filePath).read_text()
-    except FileNotFoundError:
-        text = ""
-        console.log(f"Failed to load text from {filePath}")
-
-    return text
-
-
-def getTextFromFile():
+def getTextFromFile() -> str:
     filePath = CTkInputDialog(text="Enter file path", title="Load Text").get_input()
-    textFromFile = readTextFromFile(filePath)
+    textFromFile = Path(filePath).read_text()
 
     return textFromFile
 
