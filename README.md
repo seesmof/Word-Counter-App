@@ -27,8 +27,10 @@ Word Counter is a simple and easy-to-use tool for analyzing texts and getting st
 ## How to Use
 
 1. [Download](https://github.com/seesmof/word-counter-app/archive/refs/tags/v1.0.0.zip) the files to your computer
-2. Open the downloaded folder and double-click `Run.vbs` file
-3. Enjoy!
+   1. Make sure you have Python 3.10 or higher installed on your computer. If not, please download the latest version of Python from [here](https://www.python.org/downloads/)
+2. Unzip the downloaded archive
+3. Open app's folder and double-click `Run.vbs` file
+4. Enjoy!
 
 ## Tips and Useful Information
 
