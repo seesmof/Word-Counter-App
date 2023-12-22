@@ -31,7 +31,7 @@ class PopularWords(CTkToplevel):
             widget.destroy()
 
         words = []
-        with open("data/latest.md", "r") as f:
+        with open("data/latest.md", encoding="utf-8") as f:
             for line in f:
                 words.extend(line.split())
 

@@ -154,7 +154,7 @@ lines: {linesCount}
 symbols: {symbolsCount}
 ---
 """
-    with open(filePath, "w") as f:
+    with open(filePath, "w", encoding="utf-8") as f:
         f.write(metaData)
         f.write("\n")
         f.write(text)

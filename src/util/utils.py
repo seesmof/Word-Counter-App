@@ -36,9 +36,12 @@ def countWords(lines: [str]) -> int:
 
 def getPopularWords(lines: [str]) -> dict:
     words = Counter(
-        word.strip(punctuation) for line in lines for word in line.split() if word
+        word.strip(punctuation).lower()
+        for line in lines
+        for word in line.split()
+        if word
     )
-    return dict(words)
+    return {word.capitalize(): count for word, count in words.items()}
 
 
 def getCurrentMetrics(text: str) -> tuple[int, int, int, int]:
