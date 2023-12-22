@@ -13,6 +13,7 @@
 - [Table of contents](#table-of-contents)
 - [About](#about)
 - [How to Use](#how-to-use)
+- [Tips and Useful Information](#tips-and-useful-information)
 - [Screenshots](#screenshots)
 - [Links](#links)
 - [License](#license)
@@ -26,6 +27,14 @@ Word Counter is a simple and easy-to-use tool for analyzing texts and getting st
 1. [Download](https://github.com/seesmof/word-counter/releases) the files to your computer
 2. Open the downloaded folder and double-click `Run.vbs` file
 3. Enjoy!
+
+## Tips and Useful Information
+
+- Press Escape whenever you want to exit the app
+- All the text is UTF-8 encoded so you don't need to worry about special characters
+- Your data is automatically saved and loaded on program start and close respectively
+- Load your own text files using the `Load from file` button
+- See the most frequent words using the `Popular words` button
 
 ## Screenshots
 

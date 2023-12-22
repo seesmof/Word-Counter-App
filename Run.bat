@@ -1,7 +1,5 @@
 @echo off
 
-cls
-
 if not exist "./data/requirements.txt" (
   echo Installing requirements...
   pip install -r requirements.txt
