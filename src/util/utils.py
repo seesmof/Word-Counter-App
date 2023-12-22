@@ -1,6 +1,5 @@
 from datetime import date
 from os import path
-from pathlib import Path
 from string import punctuation
 from rich.console import Console
 from customtkinter import *
@@ -57,7 +56,7 @@ def getCurrentMetrics(text: str) -> tuple[int, int, int, int]:
 def getTextFromFile() -> str:
     filePath = CTkInputDialog(text="Enter file path", title="Load Text").get_input()
     try:
-        with open(filePath, encoding="utf-8") as file:
+        with open(filePath, "r", encoding="utf-8") as file:
             textFromFile = file.read()
     except:
         console.log("Failed to read text from file")
@@ -75,8 +74,8 @@ def generateFileName(text: str) -> str:
 
 
 def saveCurrentText(text: str) -> None:
-    text = [line.strip() for line in text.split("\n") if line.strip()]
+    lines = [line.strip() for line in text.split("\n") if line.strip()]
     currentDir = path.dirname(path.abspath(__file__))
     dataFile = path.join(currentDir, "..", "..", "data", "latest.md")
     with open(dataFile, "w", encoding="utf-8") as f:
-        f.write("\n".join(text))
+        f.write("\n".join(lines))
