@@ -39,6 +39,7 @@ class PopularWords(CTkToplevel):
         sortedPopularWords = sorted(
             popularWords.items(), key=lambda x: x[1], reverse=True
         )
+        sortedPopularWords = sortedPopularWords[:12]
 
         for word, frequency in sortedPopularWords:
             CTkLabel(self.wordsContainer, text=f"{word}: {frequency}").pack(
