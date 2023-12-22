@@ -24,7 +24,7 @@ Word Counter is a simple and easy-to-use tool for analyzing texts and getting st
 
 ## How to Use
 
-1. [Download](https://github.com/seesmof/word-counter/releases) the files to your computer
+1. [Download](https://github.com/seesmof/word-counter-app/archive/refs/tags/v1.0.0.zip) the files to your computer
 2. Open the downloaded folder and double-click `Run.vbs` file
 3. Enjoy!
 
