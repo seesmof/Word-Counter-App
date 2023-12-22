@@ -52,7 +52,11 @@ def getCurrentMetrics(text: str) -> tuple[int, int, int, int]:
 
 def getTextFromFile() -> str:
     filePath = CTkInputDialog(text="Enter file path", title="Load Text").get_input()
-    textFromFile = Path(filePath).read_text()
+    try:
+        with open(filePath, encoding="utf-8") as file:
+            textFromFile = file.read()
+    except:
+        console.log("Failed to read text from file")
 
     return textFromFile
 
@@ -69,4 +73,4 @@ def generateFileName(text: str) -> str:
 def saveCurrentText(text: str) -> None:
     text = [line.strip() for line in text.split("\n") if line.strip()]
     filePath = Path("data/latest.md")
-    filePath.write_text("\n".join(text))
+    filePath.write_text("\n".join(text), encoding="utf-8")

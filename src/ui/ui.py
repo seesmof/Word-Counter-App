@@ -203,7 +203,7 @@ def renderMainTab(root) -> CTkTextbox:
     )
 
     try:
-        with open("data/latest.md", "r") as f:
+        with open("data/latest.md", encoding="utf-8") as f:
             loadedText = f.read()
             getTextInput.insert("0.0", loadedText)
             updateMetrics(
