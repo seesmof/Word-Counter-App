@@ -17,37 +17,7 @@ from util.utils import (
 from components.AlertPopup import AlertPopup
 
 
-def updateMetrics(
-    text: str,
-    linesHeading: CTkLabel,
-    symbolsHeading: CTkLabel,
-    wordsHeading: CTkLabel,
-    timeHeading: CTkLabel,
-) -> None:
-    (
-        _,
-        linesCount,
-        symbolsCount,
-        wordsCount,
-        timeToRead,
-    ) = getCurrentMetrics(text)
-
-    linesHeading.configure(
-        text=f"Lines: {linesCount}" if linesCount else "No lines found"
-    )
-    symbolsHeading.configure(
-        text=f"Symbols: {symbolsCount}" if symbolsCount else "No symbols found"
-    )
-    wordsHeading.configure(
-        text=f"Words: {wordsCount}" if wordsCount else "No words found"
-    )
-    timeHeading.configure(
-        text=f"Time to read: {timeToRead} min" if timeToRead else "No words found"
-    )
-
-    saveTextOnExit(text)
-
-
+#! UI Sections
 def renderInputSection(root) -> tuple[CTkLabel, CTkTextbox]:
     getTextHeading = CTkLabel(
         root, text="Enter text you want to count words in", font=("Arial", 14, "bold")
@@ -117,6 +87,38 @@ def renderButtonsSection(root) -> tuple[CTkLabel, CTkButton, CTkButton, CTkButto
     )
 
 
+#! UI Functions
+def updateMetrics(
+    text: str,
+    linesHeading: CTkLabel,
+    symbolsHeading: CTkLabel,
+    wordsHeading: CTkLabel,
+    timeHeading: CTkLabel,
+) -> None:
+    (
+        _,
+        linesCount,
+        symbolsCount,
+        wordsCount,
+        timeToRead,
+    ) = getCurrentMetrics(text)
+
+    linesHeading.configure(
+        text=f"Lines: {linesCount}" if linesCount else "No lines found"
+    )
+    symbolsHeading.configure(
+        text=f"Symbols: {symbolsCount}" if symbolsCount else "No symbols found"
+    )
+    wordsHeading.configure(
+        text=f"Words: {wordsCount}" if wordsCount else "No words found"
+    )
+    timeHeading.configure(
+        text=f"Time to read: {timeToRead} min" if timeToRead else "No words found"
+    )
+
+    saveTextOnExit(text)
+
+
 def loadTextFromFile(
     textField: CTkTextbox,
     resultsLines: CTkLabel,
@@ -182,6 +184,7 @@ symbols: {symbolsCount}
         f.write(text)
 
 
+#! UI Tabs
 def renderMainTab(root) -> CTkTextbox:
     getTextHeading, getTextInput = renderInputSection(root)
 

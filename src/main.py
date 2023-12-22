@@ -11,7 +11,7 @@ from ui.ui import *
 def configureApp() -> CTk:
     app = CTk()
 
-    app.geometry("380x400")
+    app.geometry("380x390")
     app.resizable(False, False)
     app.title("Word Counter App")
     app.iconbitmap("public/logo.ico")
