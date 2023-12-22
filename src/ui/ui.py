@@ -4,7 +4,7 @@ from rich.console import Console
 console = Console()
 
 
-from util.utils import getCurrentMetrics, showPopularWords
+from util.utils import getCurrentMetrics, getTextFromFile, showPopularWords
 
 
 def updateMetrics(
@@ -97,7 +97,26 @@ def renderButtonsSection(root) -> tuple[CTkLabel, CTkButton, CTkButton, CTkButto
     loadTextFromFileButton.place(x=210, y=260)
     saveTextToFileButton.place(x=210, y=300)
 
-    return interactWithTextHeading, showMostPopularWordsButton, loadTextFromFileButton
+    return (
+        interactWithTextHeading,
+        showMostPopularWordsButton,
+        loadTextFromFileButton,
+        saveTextToFileButton,
+    )
+
+
+def loadTextFromFile(
+    textField: CTkTextbox,
+    resultsLines: CTkLabel,
+    resultsSymbols: CTkLabel,
+    resultsWords: CTkLabel,
+    resultsReadingTime: CTkLabel,
+) -> None:
+    textFromFile = getTextFromFile()
+    textField.insert("0.0", textFromFile)
+    updateMetrics(
+        textFromFile, resultsLines, resultsSymbols, resultsWords, resultsReadingTime
+    )
 
 
 def renderMainTab(root) -> None:
@@ -115,14 +134,21 @@ def renderMainTab(root) -> None:
         interactWithTextHeading,
         showMostPopularWordsButton,
         loadTextFromFileButton,
+        saveTextToFileButton,
     ) = renderButtonsSection(root)
 
     showMostPopularWordsButton.configure(
         command=lambda: showPopularWords(getTextInput.get("0.0", "end"))
     )
     loadTextFromFileButton.configure(
-        command=lambda: console.print("TODO: load text from file")
+        command=lambda: loadTextFromFile(
+            getTextInput, resultsLines, resultsSymbols, resultsWords, resultsReadingTime
+        )
     )
+    saveTextToFileButton.configure(
+        command=lambda: console.print("TODO: save text to file")
+    )
+
     getTextInput.bind(
         "<KeyRelease>",
         lambda event: updateMetrics(

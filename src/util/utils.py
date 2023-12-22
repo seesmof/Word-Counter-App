@@ -1,6 +1,7 @@
 from collections import defaultdict
 from math import ceil
 from rich.console import Console
+from customtkinter import *
 
 from components.AlertPopup import AlertPopup
 
@@ -78,3 +79,21 @@ def getCurrentMetrics(text) -> tuple[int, int, int, int]:
     timeToRead = ceil(wordsCount / 200)
 
     return lines, linesCount, symbolsCount, wordsCount, timeToRead
+
+
+def readTextFromFile(filePath):
+    try:
+        with open(filePath, "r") as f:
+            text = f.read()
+    except Exception as e:
+        console.print(e)
+        text = ""
+    return text
+
+
+def getTextFromFile():
+    getFilePath = CTkInputDialog(text="Enter file path", title="Load Text")
+    filePath = getFilePath.get_input()
+    textFromFile = readTextFromFile(filePath)
+
+    return textFromFile
