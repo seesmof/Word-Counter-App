@@ -1,9 +1,8 @@
 from collections import defaultdict
+from datetime import date
 from math import ceil
 from rich.console import Console
 from customtkinter import *
-
-from components.AlertPopup import AlertPopup
 
 console = Console()
 
@@ -46,32 +45,6 @@ def getPopularWords(lines):
     return words
 
 
-def showPopularWords(text):
-    console.log(
-        f"Started calculating most popular words from a text with {len(text)} symbols..."
-    )
-
-    # TODO read below and implement
-    # have a new window open where we would have a scrollable frame
-    # in the scrollable frame we would write all our popular words
-    # we will write from a list of custom objects from a class, that would have a word and a count
-    # each object would have a string representation
-    # or we could actually even have a class that would wrap our words container and do all the operations on them, not sure yet
-
-    lines, _ = countLines(text)
-    mostPopularWords = getPopularWords(lines)
-    mostPopularWords = sorted(
-        mostPopularWords.items(), key=lambda x: x[1], reverse=True
-    )
-
-    resultsString = "Most popular words in a given text:\n"
-    for word in mostPopularWords:
-        resultsString += f"  - {word[0]}: {word[1]}\n"
-    AlertPopup(resultsString)
-
-    console.log(f"Calculated {len(mostPopularWords)} most popular words")
-
-
 def getCurrentMetrics(text) -> tuple[int, int, int, int]:
     lines, linesCount = countLines(text)
     symbolsCount = countSymbols(lines)
@@ -97,3 +70,12 @@ def getTextFromFile():
     textFromFile = readTextFromFile(filePath)
 
     return textFromFile
+
+
+def generateFileName(text):
+    words = text.split(" ")
+    firstTwoWords = "_".join(words[:2])
+    currentTime = date.today().strftime("%d_%m_%Y")
+    fileName = f"{firstTwoWords}_{currentTime}"
+
+    return fileName

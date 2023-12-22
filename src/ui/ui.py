@@ -4,7 +4,16 @@ from rich.console import Console
 console = Console()
 
 
-from util.utils import getCurrentMetrics, getTextFromFile, showPopularWords
+from util.utils import (
+    countLines,
+    countSymbols,
+    countWords,
+    generateFileName,
+    getCurrentMetrics,
+    getPopularWords,
+    getTextFromFile,
+)
+from components.AlertPopup import AlertPopup
 
 
 def updateMetrics(
@@ -119,6 +128,52 @@ def loadTextFromFile(
     )
 
 
+def showPopularWords(text):
+    console.log(
+        f"Started calculating most popular words from a text with {len(text)} symbols..."
+    )
+
+    # TODO read below and implement
+    # have a new window open where we would have a scrollable frame
+    # in the scrollable frame we would write all our popular words
+    # we will write from a list of custom objects from a class, that would have a word and a count
+    # each object would have a string representation
+    # or we could actually even have a class that would wrap our words container and do all the operations on them, not sure yet
+
+    lines, _ = countLines(text)
+    mostPopularWords = getPopularWords(lines)
+    mostPopularWords = sorted(
+        mostPopularWords.items(), key=lambda x: x[1], reverse=True
+    )
+
+    resultsString = "Most popular words in a given text:\n"
+    for word in mostPopularWords:
+        resultsString += f"  - {word[0]}: {word[1]}\n"
+    AlertPopup(resultsString)
+
+    console.log(f"Calculated {len(mostPopularWords)} most popular words")
+
+
+def saveTextToFile(text):
+    if text == "" or text is None or len(text) == 0:
+        console.log("Failed to save text to file since it's empty")
+        AlertPopup("Cannot save an empty text!")
+        return
+
+    filePath = f"data/{generateFileName(text)}.md"
+    _, linesCount, symbolsCount, wordsCount, _ = getCurrentMetrics(text)
+    metaData = f"""---
+words: {wordsCount}
+lines: {linesCount}
+symbols: {symbolsCount}
+---
+"""
+    with open(filePath, "w") as f:
+        f.write(metaData)
+        f.write("\n")
+        f.write(text)
+
+
 def renderMainTab(root) -> None:
     getTextHeading, getTextInput = renderInputSection(root)
 
@@ -146,7 +201,7 @@ def renderMainTab(root) -> None:
         )
     )
     saveTextToFileButton.configure(
-        command=lambda: console.print("TODO: save text to file")
+        command=lambda: saveTextToFile(getTextInput.get("0.0", "end"))
     )
 
     getTextInput.bind(
