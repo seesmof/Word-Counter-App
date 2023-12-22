@@ -110,7 +110,7 @@ def updateMetrics(
         text=f"Words: {wordsCount}" if wordsCount else "No words found"
     )
     timeHeading.configure(
-        text=f"Time to read: {timeToRead} min" if timeToRead else "No words found"
+        text=f"Time to read: {timeToRead}" if timeToRead else "No words found"
     )
 
     saveCurrentText(text)
