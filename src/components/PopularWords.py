@@ -36,8 +36,11 @@ class PopularWords(CTkToplevel):
                 words.extend(line.split())
 
         popularWords = getPopularWords(words)
+        sortedPopularWords = sorted(
+            popularWords.items(), key=lambda x: x[1], reverse=True
+        )
 
-        for word, frequency in popularWords.items():
+        for word, frequency in sortedPopularWords:
             CTkLabel(self.wordsContainer, text=f"{word}: {frequency}").pack(
                 padx=5, anchor="w"
             )
