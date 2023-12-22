@@ -38,8 +38,8 @@
 
 ## Скріншоти
 
-![Main App Tab](./public/app-screenshots/main-tab.png)
-![Popular Words Window](./public/app-screenshots/popular-words-view.png)
+![Main App Tab](../public/app-screenshots/main-tab.png)
+![Popular Words Window](../public/app-screenshots/popular-words-view.png)
 
 ## Посилання
 
