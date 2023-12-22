@@ -45,7 +45,8 @@ def getCurrentMetrics(text: str) -> tuple[int, int, int, int]:
     lines, linesCount = countLines(text)
     symbolsCount = countSymbols(lines)
     wordsCount = countWords(lines)
-    timeToRead = ceil(wordsCount / 200)
+    readingTimeMinutes = wordsCount / 200
+    timeToRead = f"{readingTimeMinutes:.2f} min"
 
     return lines, linesCount, symbolsCount, wordsCount, timeToRead
 
