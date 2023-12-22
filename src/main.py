@@ -1,8 +1,6 @@
-from rich import print
+from math import ceil
 from rich.console import Console
-from rich.table import Table
 from rich.traceback import install
-from rich.markdown import Markdown as md
 from customtkinter import *
 from collections import defaultdict
 
@@ -77,13 +75,25 @@ def getCurrentMetrics(text) -> tuple[int, int, int, int]:
     lines, linesCount = countLines(text)
     symbolsCount = countSymbols(lines)
     wordsCount = countWords(lines)
-    return lines, linesCount, symbolsCount, wordsCount
+    timeToRead = ceil(wordsCount / 200)
+
+    return lines, linesCount, symbolsCount, wordsCount, timeToRead
 
 
 def updateMetrics(
-    text: str, linesHeading: CTkLabel, symbolsHeading: CTkLabel, wordsHeading: CTkLabel
+    text: str,
+    linesHeading: CTkLabel,
+    symbolsHeading: CTkLabel,
+    wordsHeading: CTkLabel,
+    timeHeading: CTkLabel,
 ) -> None:
-    _, linesCount, symbolsCount, wordsCount = getCurrentMetrics(text)
+    (
+        _,
+        linesCount,
+        symbolsCount,
+        wordsCount,
+        timeToRead,
+    ) = getCurrentMetrics(text)
 
     linesHeading.configure(
         text=f"Lines: {linesCount}" if linesCount else "No lines found"
@@ -93,6 +103,9 @@ def updateMetrics(
     )
     wordsHeading.configure(
         text=f"Words: {wordsCount}" if wordsCount else "No words found"
+    )
+    timeHeading.configure(
+        text=f"Time to read: {timeToRead} min" if timeToRead else "No words found"
     )
 
 
@@ -113,13 +126,21 @@ def renderResultsSection(root) -> tuple[CTkLabel, CTkLabel, CTkLabel, CTkLabel]:
     resultsLines = CTkLabel(root, text="No lines found", font=("Arial", 13))
     resultsSymbols = CTkLabel(root, text="No symbols found", font=("Arial", 13))
     resultsWords = CTkLabel(root, text="No words found", font=("Arial", 13))
+    resultsReadingTime = CTkLabel(root, text="No words found", font=("Arial", 13))
 
     resultsHeading.place(x=0, y=190)
     resultsLines.place(x=0, y=215)
     resultsSymbols.place(x=0, y=235)
     resultsWords.place(x=0, y=255)
+    resultsReadingTime.place(x=0, y=275)
 
-    return resultsHeading, resultsLines, resultsSymbols, resultsWords
+    return (
+        resultsHeading,
+        resultsLines,
+        resultsSymbols,
+        resultsWords,
+        resultsReadingTime,
+    )
 
 
 def renderButtonsSection(root) -> tuple[CTkLabel, CTkButton, CTkButton, CTkButton]:
@@ -155,9 +176,13 @@ def renderButtonsSection(root) -> tuple[CTkLabel, CTkButton, CTkButton, CTkButto
 def renderMainTab(root) -> None:
     getTextHeading, getTextInput = renderInputSection(root)
 
-    resultsHeading, resultsLines, resultsSymbols, resultsWords = renderResultsSection(
-        root
-    )
+    (
+        resultsHeading,
+        resultsLines,
+        resultsSymbols,
+        resultsWords,
+        resultsReadingTime,
+    ) = renderResultsSection(root)
 
     (
         interactWithTextHeading,
@@ -174,7 +199,11 @@ def renderMainTab(root) -> None:
     getTextInput.bind(
         "<KeyRelease>",
         lambda event: updateMetrics(
-            getTextInput.get("0.0", "end"), resultsLines, resultsSymbols, resultsWords
+            getTextInput.get("0.0", "end"),
+            resultsLines,
+            resultsSymbols,
+            resultsWords,
+            resultsReadingTime,
         ),
     )
 
