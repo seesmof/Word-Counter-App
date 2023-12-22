@@ -1,3 +1,5 @@
+**[Інструкція Українською](./docs/README_Ukrainian.md)**
+
 <a name="readme-top"></a>
 
 <div align="center">
@@ -20,7 +22,7 @@
 
 ## About
 
-Word Counter is a simple and easy-to-use tool for analyzing texts and getting statistics about the number of words and characters they contain. It allows users to load texts from files and calculates various metrics such as word count, character count, and reading level. The app is designed to be straightforward and intuitive, making it a useful tool for writers, students, and anyone who needs to analyze texts quickly and easily.
+Word Counter is a simple and easy-to-use tool for analyzing texts and getting statistics about the number of words and characters they contain. It allows users to load texts from files and calculates various metrics such as word count, character count, and reading time. The app is designed to be straightforward and intuitive, making it a useful tool for writers, students, and anyone who needs to analyze texts quickly and easily.
 
 ## How to Use
 
