@@ -86,7 +86,6 @@ def saveTextOnExit(text):
         line for line in text.split("\n") if line != "" or line != "\n" or line != " "
     ]
     text.pop()
-    console.print(text)
     filePath = f"data/latest.md"
     with open(filePath, "w") as f:
         f.write("\n".join(text))
